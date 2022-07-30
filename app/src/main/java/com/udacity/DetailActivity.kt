@@ -23,8 +23,8 @@ private lateinit var binding: ActivityDetailBinding
         binding.layout.tvStatusValue.apply {
             this.text=intent.extras?.getString(intentArg_status)?:"unKnown"
         }
-        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.cancelAll()
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancelAll()
         binding.layout.button.setOnClickListener {
             this.finish()
         }
