@@ -28,11 +28,13 @@ class DetailActivity : AppCompatActivity() {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.cancelAll()
         binding.layout.button.setOnClickListener {
-
-            (binding.layout.button.parent as MotionLayout).transitionToStart()
-            Timer().schedule((binding.layout.button.parent as MotionLayout).transitionTimeMs) {
-                finish()
+            with((binding.layout.button.parent as MotionLayout)) {
+                transitionToStart()
+                Timer().schedule(transitionTimeMs) {
+                    finish()
+                }
             }
+
 
         }
         setSupportActionBar(toolbar)
