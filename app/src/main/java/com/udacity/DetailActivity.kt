@@ -5,10 +5,13 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.udacity.databinding.ActivityDetailBinding
 import kotlinx.android.synthetic.main.activity_detail.*
 import com.udacity.MainActivity.Companion.intentArg_fileName
 import com.udacity.MainActivity.Companion.intentArg_status
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class DetailActivity : AppCompatActivity() {
@@ -23,10 +26,16 @@ private lateinit var binding: ActivityDetailBinding
         binding.layout.tvStatusValue.apply {
             this.text=intent.extras?.getString(intentArg_status)?:"unKnown"
         }
+
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.cancelAll()
         binding.layout.button.setOnClickListener {
-            this.finish()
+            (binding.layout.button.parent as MotionLayout).transitionToStart()
+            Timer().schedule((binding.layout.button.parent as MotionLayout).transitionTimeMs){
+            finish()
+            }
+
+
         }
         setSupportActionBar(toolbar)
     }
